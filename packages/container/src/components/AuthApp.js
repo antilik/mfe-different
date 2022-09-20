@@ -10,6 +10,9 @@ const AuthApp = () => {
   useEffect(() => {
     const { onParentNavigate } = mount(ref.current, {
       initialPath: history.location.pathname,
+      onSignIn: () => {
+      console.log('User signed ->>>>>>>>');
+      },
       onNavigate: ({ pathname: nextPathName }) => {
         const { pathname } = history.location;
         if (pathname !== nextPathName) {
