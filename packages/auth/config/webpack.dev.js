@@ -13,7 +13,7 @@ const devConfig = {
   devServer: {
     port: 8082,
     historyApiFallback: {
-      index: '/index.html'
+      index: '/index.html',
     },
   },
   plugins: [
@@ -21,7 +21,7 @@ const devConfig = {
       name: 'auth',
       filename: 'remoteEntry.js',
       exposes: {
-        './AuthApp': './src/bootstrap'
+        './AuthApp': './src/bootstrap',
       },
       shared: packageJson.dependencies,
     }),

@@ -12,7 +12,7 @@ defaults:
     working-directory: packages/auth
 
 jobs:
-  builds:
+  build:
     runs-on: ubuntu-latest
 
     steps:

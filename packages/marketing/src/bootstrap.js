@@ -2,23 +2,25 @@ import React from 'react';
 import { render } from 'react-dom';
 import { createMemoryHistory, createBrowserHistory } from 'history';
 
-import App from "./App";
+import App from './App';
 
 // Mount function to start up the app
 const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
   const history = defaultHistory || createMemoryHistory({
     initialEntries: [initialPath],
   });
-
-  onNavigate && history.listen(onNavigate);
+  if (onNavigate) {
+    history.listen(onNavigate);
+  }
 
   render(
     <App history={history} />,
     el
   );
   return {
-    onParentNavigate: ({pathname: nextPathName }) => {
+    onParentNavigate: ({ pathname: nextPathName }) => {
       const { pathname } = history.location;
+
       if (pathname !== nextPathName) {
         history.push(nextPathName);
       }
@@ -30,6 +32,7 @@ const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
 // call mount immediately
 if (process.env.NODE_ENV === 'development') {
   const devRoot = document.getElementById('_marketing-dev-root');
+
   if (devRoot) {
     mount(devRoot, {defaultHistory: createBrowserHistory()})
   }
